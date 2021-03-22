@@ -1,7 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap");
 :root {
   --primary-text-color: #fff;
+
   --primary-background-color: #ebf2f5;
+
+  --primary-landing-color-one: #29b6d1;
+  --primary-landing-color-two: #00c7c7;
+
+  --primary-buttom-color: #ffd666;
+  --primary-buttom-color-two: #15c3d6;
+  --secondary-buttom-color: #96feff;
+  --secondary-buttom-color-two: #17e6eb;
 }
 * {
   margin: 0;
