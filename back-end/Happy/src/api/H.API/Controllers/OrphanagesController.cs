@@ -1,37 +1,35 @@
-﻿using H.Domain.Models;
+﻿using H.BuildingBlocks.Interfaces.Service;
+using H.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 
 namespace H.API.Controllers
 {
     public class OrphanagesController : BaseController
     {
+
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public async Task<IActionResult> Get(
+            [FromServices] IOrphanageService _service)
+            => CustomResponse(await _service.ObterTodos());
 
         [HttpGet("{id}")]
-        public OrphanageModel Get(int id)
-        {
-            return new OrphanageModel();
-        }
+        public async Task<IActionResult> Get(
+            Guid id,
+            [FromServices] IOrphanageService _service)
+            => CustomResponse(await _service.ObterPorId(id));
 
         [HttpPost]
-        public IActionResult Post([FromBody] OrphanageModel orphanageModel)
-        {
-            return CustomResponse();
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        public async Task<IActionResult> Post(
+            [FromServices] IOrphanageService _service,
+            [FromForm] OrphanageModel orphanageModel)
+            => CustomResponse(await _service.Adicionar(orphanageModel));
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        public async Task<IActionResult> Delete(
+            Guid id,
+            [FromServices] IOrphanageService _service)
+            => CustomResponse(await _service.Deletar(id));
     }
 }

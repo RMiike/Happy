@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using H.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,25 @@ namespace H.API.Controllers
             }
 
             return CustomResponse();
+        }
+        protected ActionResult CustomResponse(CustomizedResult resposta)
+        {
+            ResponsePossuiErros(resposta);
+
+            return CustomResponse(resposta.Data);
+        }
+
+        protected bool ResponsePossuiErros(CustomizedResult resposta)
+        {
+            if (resposta == null || !resposta.Erros.Mensages.Any())
+                return false;
+
+            foreach (var mensagem in resposta.Erros.Mensages)
+            {
+                AdicionarErroProcessamento(mensagem);
+            }
+
+            return true;
         }
         protected bool OperacaoValida()
         {

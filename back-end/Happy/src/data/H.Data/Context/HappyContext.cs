@@ -8,7 +8,8 @@ namespace H.Data.Context
     public class HappyContext : DbContext
     {
         public HappyContext(DbContextOptions<HappyContext> opt) : base(opt) { }
-        public DbSet<Orphanage> Transactions { get; set; }
+        public DbSet<Orphanage> Orphanages { get; set; }
+        public DbSet<Image> Images { get; set; }
         protected override void OnModelCreating(ModelBuilder model)
         {
             foreach (var property in model.Model.GetEntityTypes().SelectMany(

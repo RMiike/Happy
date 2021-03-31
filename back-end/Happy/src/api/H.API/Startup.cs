@@ -1,4 +1,8 @@
+using H.BuildingBlocks.Interfaces.Repository;
+using H.BuildingBlocks.Interfaces.Service;
 using H.Data.Context;
+using H.Data.Repositories;
+using H.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,17 +25,34 @@ namespace H.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             services.AddDbContext<HappyContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("HappyDb")));
             services.AddScoped<HappyContext>();
 
+            services.AddScoped<IOrphanageService, OrphanageService>();
+            services.AddScoped<IOrphanageRepository, OrphanageRepository>();
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "H.API", Version = "v1" });
+            });
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("Total",
+                    builder =>
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader());
             });
         }
 
@@ -47,7 +68,8 @@ namespace H.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseStaticFiles();
+            app.UseCors("Total");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
