@@ -8,13 +8,16 @@ namespace H.Data.Repositories
     public static class OrphanageModelAndEntityMapping
     {
         public static Orphanage ConvertToOrphanage(this OrphanageModel orphanageModel)
-            => new Orphanage(orphanageModel.Name,
-                             orphanageModel.Latitude,
-                             orphanageModel.Longitude,
-                             orphanageModel.About,
-                             orphanageModel.Instructions,
-                             orphanageModel.OpeningHours,
-                             orphanageModel.OpenOnWeekends);
+        {
+            return new Orphanage(orphanageModel.Name,
+                                orphanageModel.Latitude,
+                                 orphanageModel.Longitude,
+                                 orphanageModel.About,
+                                 orphanageModel.Instructions,
+                                 orphanageModel.OpeningHours,
+                                 orphanageModel.OpenOnWeekends);
+            ;
+        }
 
         public static IEnumerable<OrphanageModel> ConvertToModel(this IEnumerable<Orphanage> orphanages)
           => new List<OrphanageModel>(orphanages
@@ -39,5 +42,8 @@ namespace H.Data.Repositories
                                 orphanage.OpeningHours,
                                 orphanage.OpenOnWeekends,
                                 orphanage.Images.Select(x => x.Path.ToString()).ToList());
+
+
     }
+
 }
