@@ -1,21 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap");
 :root {
   --primary-text-color: #fff;
+  --secondary-text-color: #4d6f80;
+  --tertiary-text-color: #5c8599;
 
   --primary-background-color: #ebf2f5;
+  --secondary-background-color: 329.54deg, #15b6d6 0%, #15d6d6 100%;
+  --tertiary-background-color: #fff;
+  --tertiary-background-color-two: #e6f7fb;
+
+  --fourfy-background-color: 149.97deg, #e6f7fb 8.13%, #ffffff 92.67%;
+  --fourfy-background-color-two: 154.16deg, #edfff6 7.85%, #ffffff 91.03%;
+  --fourfy-background-color-tree: 154.16deg, #fdf0f5 7.85%, #ffffff 91.03%;
 
   --primary-landing-color-one: #29b6d1;
   --primary-landing-color-two: #00c7c7;
 
   --primary-buttom-color: #ffd666;
   --primary-buttom-color-two: #15c3d6;
+
   --secondary-buttom-color: #96feff;
   --secondary-buttom-color-two: #17e6eb;
+
+  --tertiary-button-color-one: #a1e9c5;
+  --tertiary-button-color-two: #37c77f;
+  --tertiary-button-color-tree: #3cdc8c;
+  --tertiary-button-color-four: #36cf82;
+  --tertiary-button-color-five: #ff669d;
+
+  --quaternary-button-color-one: #12afcb;
+  --quaternary-button-color-two: #17d6eb;
+  --quaternary-button-color-tree: #17d6eb;
 
   --primary-buttom-popup-map: #0089a5;
 
   --primary-box-shadow: 17.2868px 27.6598px 41.4884 rgba(23, 142, 166, 0.16);
+
+  --primary-border: #d3e2e5;
+  --secondary-border: #dde3f0;
+  --tertiary-border: #b3dae2;
 }
+
 * {
   margin: 0;
   padding: 0;

@@ -45,7 +45,7 @@ namespace H.Domain.Entities
         public string Instructions { get; private set; }
         public string OpeningHours { get; private set; }
         public bool OpenOnWeekends { get; private set; }
-        public IEnumerable<Image> Images { get;  set; }
+        public IEnumerable<Image> Images { get; set; }
         public override bool IsValid()
         {
             ValidationResult = new OrphanageValidation().Validate(this);
@@ -94,8 +94,7 @@ namespace H.Domain.Entities
                     .WithMessage($"Preencha a Longitude.");
 
                 RuleFor(x => x.OpenOnWeekends)
-                    .NotEmpty()
-                    .WithMessage($"Informe se o estabelecimento estará aberto nos finais de semana.");
+                    .Must(x => x == false || x == true);
             }
         }
     }

@@ -3,6 +3,7 @@ using H.BuildingBlocks.Interfaces.Service;
 using H.Data.Repositories;
 using H.Domain.Entities;
 using H.Domain.Models;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
@@ -15,10 +16,14 @@ namespace H.Services.Services
 
         private readonly IImageService _service;
 
-        public OrphanageService(IOrphanageRepository orphanageRepository, IImageService service)
+        private readonly AppSettings _settings;
+        public OrphanageService(IOrphanageRepository orphanageRepository,
+                                IImageService service,
+                                IOptions<AppSettings> settings)
         {
             _orphanageRepository = orphanageRepository;
             _service = service;
+            _settings = settings.Value;
         }
 
         public async Task<CustomizedResult> ObterTodos()
@@ -40,7 +45,7 @@ namespace H.Services.Services
                     return result;
                 }
             }
-            var models = orphanages.ConvertToModel();
+            var models = orphanages.ConvertToModel(_settings.BaseUrl);
             var resultSucess = new CustomizedResult("Todos os orfanatos", models);
             return resultSucess;
         }
@@ -58,12 +63,18 @@ namespace H.Services.Services
                 }
 
                 var response = await _orphanageRepository.Adicionar(orphanage);
-                await _service.Adicionar(new ImageModel(response, model.Images));
-                
-                var customizedResult = new CustomizedResult("Orphanato adicionado com sucesso.", response.ConvertToModel());
+                var fotos = await _service.Adicionar(new ImageModel(response, model.Images));
+
+                var customizedResult = new CustomizedResult("Orphanato adicionado com sucesso.", response.ConvertToModel("~/"));
                 return customizedResult;
             }
             catch (InvalidOperationException e)
+            {
+                var customizedResult = new CustomizedResult("Não foi possível adicionar o orphanato", e.Message);
+                customizedResult.AdicionarMensagensDeErro(unicError: e.Message);
+                return customizedResult;
+            }
+            catch (Exception e)
             {
                 var customizedResult = new CustomizedResult("Não foi possível adicionar o orphanato", e.Message);
                 customizedResult.AdicionarMensagensDeErro(unicError: e.Message);
@@ -100,7 +111,7 @@ namespace H.Services.Services
                 return result;
             }
 
-            var orphanageModel = orphanage.ConvertToModel();
+            var orphanageModel = orphanage.ConvertToModel(_settings.BaseUrl);
             var resultOk = new CustomizedResult($"Orfanato de id {id}", orphanageModel);
             return resultOk;
         }

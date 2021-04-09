@@ -1,6 +1,15 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Popup } from "react-leaflet";
+import mapMarkerImg from "../../assets/images/map-marker.svg";
+import { Popup, MapContainer, TileLayer, Marker } from "react-leaflet";
+import Leaflet from "leaflet";
+
+const mapIcon = Leaflet.icon({
+  iconUrl: mapMarkerImg,
+  iconSize: [58, 68],
+  iconAnchor: [29, 68],
+  popupAnchor: [170, 2],
+});
 
 export const PageMap = styled.div`
   width: 100vw;
@@ -40,6 +49,7 @@ export const PageMap = styled.div`
   }
 `;
 export const CreateOrphanage = styled(Link)`
+  z-index: 100;
   position: absolute;
   right: 40px;
   bottom: 40px;
@@ -55,7 +65,6 @@ export const CreateOrphanage = styled(Link)`
     background: var(--secondary-buttom-color-two);
   }
 `;
-
 export const MapPopup = styled(Popup).attrs({
   maxWidth: 240,
   minWidth: 240,
@@ -90,3 +99,20 @@ export const MapPopup = styled(Popup).attrs({
     display: none;
   }
 `;
+
+export const Map = styled(MapContainer).attrs({
+  center: [-15.8305799, -48.0383723],
+  zoom: 15,
+})`
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+`;
+
+export const MapTileLayer = styled(TileLayer).attrs({
+  url: "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+})``;
+
+export const MapMarker = styled(Marker).attrs({
+  icon: mapIcon,
+})``;
