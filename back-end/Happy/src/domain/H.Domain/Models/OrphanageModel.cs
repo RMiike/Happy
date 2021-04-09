@@ -1,5 +1,4 @@
-﻿using H.Domain.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 
@@ -22,7 +21,15 @@ namespace H.Domain.Models
             OpenOnWeekends = openOnWeekends;
         }
 
-        public OrphanageModel(Guid id, string name, decimal latitude, decimal longitude, string about, string instructions, string openingHours, bool openOnWeekends, IEnumerable<string> imagesPath)
+        public OrphanageModel(Guid id,
+                              string name,
+                              decimal latitude,
+                              decimal longitude,
+                              string about,
+                              string instructions,
+                              string openingHours,
+                              bool openOnWeekends,
+                              IEnumerable<CreateImageModel> images)
         {
             Id = id;
             Name = name;
@@ -32,7 +39,7 @@ namespace H.Domain.Models
             Instructions = instructions;
             OpeningHours = openingHours;
             OpenOnWeekends = openOnWeekends;
-            ImagesPath = imagesPath;
+            ImagesModel = images;
         }
 
         public Guid Id { get; set; }
@@ -43,7 +50,7 @@ namespace H.Domain.Models
         public string Instructions { get; set; }
         public string OpeningHours { get; set; }
         public bool OpenOnWeekends { get; set; }
-        public IEnumerable<string> ImagesPath { get; set; }
+        public IEnumerable<CreateImageModel> ImagesModel { get; set; }
         public IEnumerable<IFormFile> Images { get; set; }
     }
 }

@@ -22,15 +22,30 @@ namespace H.Services.Services
             _repository = repository;
         }
 
+        public async Task<string> ObterPorId(Guid id)
+        {
+            var images = await _repository.ObterPorId(id);
+            if (images == null)
+            {
+                return null;
+            }
+            string filePath = Path.Combine(GeneralHelpers.CreateIfNotExistsImagePathAndReturn(), images.Path);
+            return filePath;
+        }
         public async Task<IEnumerable<Image>> Adicionar(ImageModel model)
         {
-
             var listImages = new List<Image>();
+            if (model.Images == null)
+            {
+                return listImages;
+            }
             foreach (var image in model.Images)
             {
                 var customFileName = CreateCustomFileName(image);
                 string path = Path.Combine(GeneralHelpers.CreateIfNotExistsImagePathAndReturn(), customFileName);
-                var newImage = new Image(path, model.Orphanage.Id, model.Orphanage);
+
+
+                var newImage = new Image(customFileName, model.Orphanage.Id, model.Orphanage);
                 if (!newImage.IsValid())
                 {
                     throw new InvalidOperationException(newImage.ErrorMessages.FirstOrDefault());
@@ -55,5 +70,6 @@ namespace H.Services.Services
             fileName = $"{fileName}-{DateTime.Now.ToString("yymmssfff")}{extension}";
             return fileName;
         }
+
     }
 }

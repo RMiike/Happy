@@ -2,14 +2,17 @@ using H.BuildingBlocks.Interfaces.Repository;
 using H.BuildingBlocks.Interfaces.Service;
 using H.Data.Context;
 using H.Data.Repositories;
+using H.Domain.Entities;
 using H.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
 
 namespace H.API
 {
@@ -40,6 +43,8 @@ namespace H.API
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageRepository, ImageRepository>();
 
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
 
             services.AddSwaggerGen(c =>
             {
@@ -66,7 +71,11 @@ namespace H.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Images")),
+                RequestPath = "/Images"
+            });
             app.UseRouting();
             app.UseStaticFiles();
             app.UseCors("Total");

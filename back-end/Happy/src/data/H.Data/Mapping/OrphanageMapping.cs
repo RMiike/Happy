@@ -17,12 +17,12 @@ namespace H.Data.Mapping
                 .IsRequired(true);
 
             builder.Property(x => x.Latitude)
-               .HasColumnType("decimal(10,2)")
+               .HasColumnType("decimal(10,8)")
                .IsRequired(true);
 
 
             builder.Property(x => x.Longitude)
-               .HasColumnType("decimal(10,2)")
+               .HasColumnType("decimal(10,8)")
                .IsRequired(true);
 
             builder.Property(x => x.About)

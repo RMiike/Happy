@@ -37,14 +37,19 @@ namespace H.Data.Repositories
 
         public async Task<Image> ObterPorId(Guid id)
         {
-            var orphanage = await _context.Images.Where(x => x.Id == id).FirstOrDefaultAsync();
-            return orphanage;
+            var image = await _context.Images.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return image;
+        }
+        public async Task<IEnumerable<Image>> ObterPorIdDeOrfanato(Guid id)
+        {
+            var images = await _context.Images.Where(x => x.OrphanageId == id).ToListAsync();
+            return images;
         }
 
         public async Task<IEnumerable<Image>> ObterTodos()
         {
-            var orphanages = await _context.Images.AsNoTracking().ToListAsync();
-            return orphanages;
+            var images = await _context.Images.AsNoTracking().ToListAsync();
+            return images;
         }
 
         public void Dispose()
