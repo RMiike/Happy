@@ -69,7 +69,6 @@ namespace H.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "H.API v1"));
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions
             {
