@@ -45,7 +45,7 @@ namespace H.Services.Services
                     return result;
                 }
             }
-            var models = orphanages.ConvertToModel(_settings.BaseUrl);
+            var models = orphanages.ConvertToModel(_settings.BaseUrl, _settings.RemoteBaseUrl);
             var resultSucess = new CustomizedResult("Todos os orfanatos", models);
             return resultSucess;
         }
@@ -65,7 +65,7 @@ namespace H.Services.Services
                 var response = await _orphanageRepository.Adicionar(orphanage);
                 var fotos = await _service.Adicionar(new ImageModel(response, model.Images));
 
-                var customizedResult = new CustomizedResult("Orphanato adicionado com sucesso.", response.ConvertToModel("~/"));
+                var customizedResult = new CustomizedResult("Orphanato adicionado com sucesso.", response.ConvertToModel("~/", "~/"));
                 return customizedResult;
             }
             catch (InvalidOperationException e)
@@ -111,7 +111,7 @@ namespace H.Services.Services
                 return result;
             }
 
-            var orphanageModel = orphanage.ConvertToModel(_settings.BaseUrl);
+            var orphanageModel = orphanage.ConvertToModel(_settings.BaseUrl, _settings.RemoteBaseUrl);
             var resultOk = new CustomizedResult($"Orfanato de id {id}", orphanageModel);
             return resultOk;
         }

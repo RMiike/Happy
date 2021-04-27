@@ -29,7 +29,8 @@ namespace H.Domain.Models
                               string instructions,
                               string openingHours,
                               bool openOnWeekends,
-                              IEnumerable<CreateImageModel> images)
+                              IEnumerable<CreateImageModel> images,
+                              IEnumerable<CreateImageModel> remoteImages)
         {
             Id = id;
             Name = name;
@@ -40,6 +41,7 @@ namespace H.Domain.Models
             OpeningHours = openingHours;
             OpenOnWeekends = openOnWeekends;
             ImagesModel = images;
+            RemoteImagesModel = remoteImages;
         }
 
         public Guid Id { get; set; }
@@ -51,6 +53,7 @@ namespace H.Domain.Models
         public string OpeningHours { get; set; }
         public bool OpenOnWeekends { get; set; }
         public IEnumerable<CreateImageModel> ImagesModel { get; set; }
+        public IEnumerable<CreateImageModel> RemoteImagesModel { get; set; }
         public IEnumerable<IFormFile> Images { get; set; }
     }
 }
