@@ -4,15 +4,19 @@ using H.Data.Context;
 using H.Data.Repositories;
 using H.Domain.Entities;
 using H.Services.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.IO;
+using System.Text;
 
 namespace H.API
 {
@@ -38,6 +42,11 @@ namespace H.API
                 opt.UseSqlServer(Configuration.GetConnectionString("HappyDb")));
             services.AddScoped<HappyContext>();
 
+            services.AddDefaultIdentity<IdentityUser>()
+                  .AddRoles<IdentityRole>()
+                  .AddEntityFrameworkStores<HappyContext>()
+                  .AddDefaultTokenProviders();
+
             services.AddScoped<IOrphanageService, OrphanageService>();
             services.AddScoped<IOrphanageRepository, OrphanageRepository>();
             services.AddScoped<IImageService, ImageService>();
@@ -58,6 +67,30 @@ namespace H.API
                         builder.AllowAnyOrigin()
                                .AllowAnyMethod()
                                .AllowAnyHeader());
+            });
+
+
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(opt =>
+            {
+                opt.RequireHttpsMetadata = true;
+                opt.SaveToken = true;
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = appSettings.Audience,
+                    ValidIssuer = appSettings.Issuer
+                };
             });
         }
 
