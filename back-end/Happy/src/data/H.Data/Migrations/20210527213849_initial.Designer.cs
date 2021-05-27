@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace H.Data.Migrations
 {
     [DbContext(typeof(HappyContext))]
-    [Migration("20210329002555_images")]
-    partial class images
+    [Migration("20210527213849_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("H.Domain.Entities.Image", b =>
@@ -56,10 +56,10 @@ namespace H.Data.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,8)");
 
                     b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,8)");
 
                     b.Property<string>("Name")
                         .IsRequired()

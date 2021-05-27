@@ -24,6 +24,7 @@ namespace H.API.Controllers
                 { "Mensagens", Erros.ToArray() }
             }));
         }
+
         protected ActionResult CustomResponse(ValidationResult validationResult)
         {
             foreach (var erro in validationResult.Errors)
