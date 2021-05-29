@@ -8,5 +8,7 @@
         public int ExpirationHours { get; set; }
         public string Issuer { get; set; }
         public string Audience { get; set; }
+        public string MailServiceKey { get; set; }
+        public string MailServiceFrom { get; set; }
     }
 }

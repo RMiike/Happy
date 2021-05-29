@@ -51,6 +51,7 @@ namespace H.API
             services.AddScoped<IOrphanageRepository, OrphanageRepository>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IMailService, MailService>();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
