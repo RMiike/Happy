@@ -2,6 +2,7 @@
 using H.Domain.Entities;
 using H.Domain.MapperEntities;
 using H.Domain.Models;
+using H.Services.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -21,13 +22,16 @@ namespace H.API.Controllers
         private readonly SignInManager<IdentityUser> __signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly IMailService _mailService;
         public UsersController(SignInManager<IdentityUser> signInManager,
                                UserManager<IdentityUser> userManager,
-                                IOptions<AppSettings> appSettings)
+                                IOptions<AppSettings> appSettings,
+                                IMailService mailService)
         {
             __signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _mailService = mailService;
         }
 
         [HttpPost("sign-up")]
@@ -74,9 +78,66 @@ namespace H.API.Controllers
                 return CustomResponse();
             }
             AdicionarErroProcessamento("Usuário ou senha incorretos.");
+            return CustomResponse("");
+        }
+
+        [HttpPost("forgot-pass")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordModel forgotPasswordModel)
+        {
+            var forgotEntity = forgotPasswordModel.ConvertToEntity();
+            if (!forgotEntity.IsValid())
+                return CustomResponse(forgotEntity.ValidationResult);
+
+
+            var user = await _userManager.FindByEmailAsync(forgotEntity.Email);
+
+            if (user == null)
+            {
+                AdicionarErroProcessamento("Nova senha foi enviado ao email.");
+                return CustomResponse();
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await ResetPassword(user, token).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(result))
+                return CustomResponse();
+
+            await _mailService.SendEmailAsync(
+              user.Email,
+              "Forgot password.",
+              "<h1>Acess with your new password and change. </h1>" +
+              $"<p>Your new password is: {result} </p>");
+
             return CustomResponse();
         }
 
+        private async Task<string> ResetPassword(IdentityUser user, string token)
+        {
+            if (user == null || string.IsNullOrWhiteSpace(token))
+            {
+                AdicionarErroProcessamento("Usuário inválido ou token expirado.");
+                return string.Empty;
+            }
+
+            var randomPassword = $"P{Guid.NewGuid().ToString().Replace("-", "@")}";
+
+            var result = await _userManager.ResetPasswordAsync(user,
+                     token, randomPassword);
+
+            if (!result.Succeeded)
+            {
+                var erros = result.Errors.Select(error => error.Description);
+                foreach (var erro in erros)
+                {
+                    AdicionarErroProcessamento(erro);
+                }
+                return string.Empty;
+
+            }
+            return randomPassword;
+        }
         private async Task<SignInUserResponse> GenerateJWT(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
