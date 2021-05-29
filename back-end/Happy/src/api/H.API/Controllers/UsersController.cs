@@ -113,6 +113,34 @@ namespace H.API.Controllers
             return CustomResponse();
         }
 
+        [HttpPost("change-pass")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
+        {
+            var entity = model.ConvertToEntity();
+            if (!entity.IsValid())
+                return CustomResponse(entity.ValidationResult);
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                AdicionarErroProcessamento("Usuário inválido.");
+                return CustomResponse();
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, entity.OldPassword, entity.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    AdicionarErroProcessamento(error.Description);
+                }
+                return CustomResponse();
+            }
+
+            return CustomResponse("Password was changed successfully.");
+        }
         private async Task<string> ResetPassword(IdentityUser user, string token)
         {
             if (user == null || string.IsNullOrWhiteSpace(token))
