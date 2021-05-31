@@ -39,6 +39,9 @@
   --primary-border: #d3e2e5;
   --secondary-border: #dde3f0;
   --tertiary-border: #b3dae2;
+
+  --primary-input-background: #f5f8fa;
+  --primary-input-text: #8fa7b2;
 }
 
 * {
