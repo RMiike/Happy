@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -62,5 +62,24 @@ export const RightSide = styled.div`
   }
   @media (max-width: 800px) {
     width: 100%;
+  }
+`;
+
+export const BackButton = styled.div`
+  position: absolute;
+  right: 43px;
+  top: 40px;
+
+  width: 48px;
+  height: 48px;
+  background: var(--primary-background-color);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 0.2s;
+  &&:hover {
+    background: var(--secondary-buttom-color);
   }
 `;
