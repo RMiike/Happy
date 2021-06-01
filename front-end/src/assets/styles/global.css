@@ -42,6 +42,9 @@
 
   --primary-input-background: #f5f8fa;
   --primary-input-text: #8fa7b2;
+
+  --restrict-button-primary-collor: #12d4e0;
+  --restrict-button-seconday-collor: #96feff;
 }
 
 * {

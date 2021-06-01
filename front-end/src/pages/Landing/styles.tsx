@@ -48,7 +48,7 @@ export const ContentWrapper = styled.div`
 
 export const Location = styled.div`
   position: absolute;
-  right: 0;
+  left: 300px;
   top: 0;
 
   font-size: 24px;
@@ -56,7 +56,7 @@ export const Location = styled.div`
 
   display: flex;
   flex-direction: column;
-  text-align: right;
+  text-align: left;
   strong {
     font-weight: 800;
   }
@@ -78,5 +78,24 @@ export const EnterApp = styled(Link)`
   transition: background-color 0.2s;
   &&:hover {
     background: var(--secondary-buttom-color);
+  }
+`;
+export const RestrictAccess = styled(Link)`
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-decoration: none;
+  width: 222px;
+  height: 56px;
+  background: var(--restrict-button-primary-collor);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-text-color);
+  transition: background-color 0.2s;
+  &&:hover {
+    background: var(--restrict-button-seconday-collor);
+    color: var(--primary-buttom-color-two);
   }
 `;
