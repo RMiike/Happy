@@ -13,7 +13,7 @@ namespace H.Data.Mapping
             builder.ToTable("Orphanage");
 
             builder.Property(x => x.Name)
-                .HasColumnType("nvarchar(20)")
+                .HasColumnType("varchar(20)")
                 .IsRequired(true);
 
             builder.Property(x => x.Latitude)
@@ -26,19 +26,19 @@ namespace H.Data.Mapping
                .IsRequired(true);
 
             builder.Property(x => x.About)
-              .HasColumnType("nvarchar(150)")
+              .HasColumnType("varchar(150)")
               .IsRequired(true);
 
             builder.Property(x => x.Instructions)
-              .HasColumnType("nvarchar(150)")
+              .HasColumnType("varchar(150)")
               .IsRequired(true);
 
             builder.Property(x => x.OpeningHours)
-              .HasColumnType("nvarchar(20)")
+              .HasColumnType("varchar(20)")
               .IsRequired(true);
 
             builder.Property(x => x.OpenOnWeekends)
-              .HasColumnType("bit")
+              .HasColumnType("boolean")
               .IsRequired(true);
 
             builder.Ignore(x => x.ErrorMessages);

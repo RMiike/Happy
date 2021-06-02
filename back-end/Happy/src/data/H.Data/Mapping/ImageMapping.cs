@@ -13,7 +13,7 @@ namespace H.Data.Mapping
             builder.ToTable("Image");
 
             builder.Property(x => x.Path)
-                .HasColumnType("nvarchar(250)")
+                .HasColumnType("varchar(250)")
                 .IsRequired(true);
 
             builder.HasOne(x => x.Orphanage)

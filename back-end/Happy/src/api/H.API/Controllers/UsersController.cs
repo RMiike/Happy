@@ -93,7 +93,7 @@ namespace H.API.Controllers
 
             if (user == null)
             {
-                AdicionarErroProcessamento("Nova senha foi enviado ao email.");
+                AdicionarErroProcessamento("Nova senha foi enviada ao email.");
                 return CustomResponse();
             }
 

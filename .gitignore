@@ -256,6 +256,7 @@ ServiceFabricBackup/
 *.bim_*.settings
 *.rptproj.rsuser
 *- Backup*.rdl
+*.env
 
 # Microsoft Fakes
 FakesAssemblies/
