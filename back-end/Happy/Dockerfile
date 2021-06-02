@@ -21,7 +21,9 @@ RUN dotnet publish "H.API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 # ENTRYPOINT ["dotnet", "H.API.dll"]
 
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet "H.API.dll"
 
+RUN mkdir -p /app/Images
