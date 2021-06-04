@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
           <CheckBox type="checkbox" name="checkbox" onChange={() => {}}>
             <p>Lembrar-me</p>
           </CheckBox>
-          <LinkToForgot to="/forgot_password">Esqueci minha senha</LinkToForgot>
+          <LinkToForgot to="/forgot-pass">Esqueci minha senha</LinkToForgot>
         </MidleDiv>
         <Button type="submit">Entrar</Button>
       </FormContent>
