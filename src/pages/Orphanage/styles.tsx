@@ -181,14 +181,14 @@ export const Hour = styled.div`
 
 export const OpenOnWeekends = styled.div`
   background: linear-gradient(
-    ${(props) =>
+    ${(props: any) =>
       props.className === "dont-open"
         ? "154.16deg, #fdf0f5 7.85%, #ffffff 91.03%"
         : "154.16deg, #edfff6 7.85%, #ffffff 91.03%"}
   );
   border: 1px solid
-    ${(props) => (props.className === "dont-open" ? "#ff669d" : "#a1e9c5")};
-  color: ${(props) =>
+    ${(props: any) => (props.className === "dont-open" ? "#ff669d" : "#a1e9c5")};
+  color: ${(props: any) =>
     props.className === "dont-open" ? "#ff669d" : "#a1e9c5"};
 `;
 export const ContactButton = styled.button`

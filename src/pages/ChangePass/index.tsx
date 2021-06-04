@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  FormContent,
-  Title,
-  MidleDiv,
-  LinkToForgot,
-  LinkToRegister,
-  DescriptionTitle,
-} from "./styles";
+import { FormContent, Title, DescriptionTitle } from "./styles";
 import { FiLock } from "react-icons/fi";
 import Input from "../../components/Form/Input";
 import Button from "../../components/Form/Button";
