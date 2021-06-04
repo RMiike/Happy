@@ -9,6 +9,7 @@ namespace H.Data.Repositories
     {
         public static Orphanage ConvertToOrphanage(this OrphanageModel orphanageModel)
         {
+
             return new Orphanage(orphanageModel.Name,
                                 orphanageModel.Latitude,
                                  orphanageModel.Longitude,
@@ -16,7 +17,6 @@ namespace H.Data.Repositories
                                  orphanageModel.Instructions,
                                  orphanageModel.OpeningHours,
                                  orphanageModel.OpenOnWeekends);
-            ;
         }
 
         public static IEnumerable<OrphanageModel> ConvertToModel(this IEnumerable<Orphanage> orphanages, string baseUrl, string remoteBaseUrl)

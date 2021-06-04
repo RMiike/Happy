@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\services\H.Services\H.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

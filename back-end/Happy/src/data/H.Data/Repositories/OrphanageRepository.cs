@@ -21,6 +21,7 @@ namespace H.Data.Repositories
         public async Task<Orphanage> Adicionar(Orphanage entity)
         {
             var response = await _context.AddAsync(entity);
+
             var isCommited = await _context.Commit();
             return isCommited ? response.Entity : throw new InvalidOperationException();
         }

@@ -11,8 +11,10 @@ namespace H.Data.Context
         public HappyContext(DbContextOptions<HappyContext> opt) : base(opt) { }
         public DbSet<Orphanage> Orphanages { get; set; }
         public DbSet<Image> Images { get; set; }
+
         protected override void OnModelCreating(ModelBuilder model)
         {
+
             base.OnModelCreating(model);
             foreach (var property in model.Model.GetEntityTypes().SelectMany(
                e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
@@ -22,6 +24,7 @@ namespace H.Data.Context
         }
         public async Task<bool> Commit()
         {
+
             return await base.SaveChangesAsync() > 0;
         }
     }

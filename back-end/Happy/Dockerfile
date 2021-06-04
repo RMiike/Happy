@@ -26,4 +26,4 @@ COPY --from=publish /app/publish .
 
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet "H.API.dll"
 
-RUN mkdir -p /app/Images
+RUN mkdir -p /app/Images/

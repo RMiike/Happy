@@ -38,11 +38,11 @@ namespace H.API
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
-            //services.AddDbContext<HappyContext>(opt =>
-            //    opt.UseSqlServer(Configuration.GetConnectionString("HappyDb")));
-
             services.AddDbContext<HappyContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("HappyDb")));
+                opt.UseSqlServer(Configuration.GetConnectionString("HappyDb")));
+
+            //services.AddDbContext<HappyContext>(opt =>
+            //    opt.UseNpgsql(Configuration.GetConnectionString("HappyDb")));
 
             services.AddScoped<HappyContext>();
 

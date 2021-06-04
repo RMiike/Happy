@@ -1,8 +1,7 @@
 import React from "react";
-import { FormContent, SignUpTitle, MidleDiv, LinkTo } from "./styles";
+import { FormContent, SignUpTitle } from "./styles";
 import { FiMail, FiLock } from "react-icons/fi";
 import Input from "../../components/Form/Input";
-import CheckBox from "../../components/Form/Checkbox";
 import Button from "../../components/Form/Button";
 import AuthPage from "../../components/AuthPage";
 
