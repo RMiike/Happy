@@ -2,11 +2,11 @@
     <img alt="Happy" title="Happy" src=".github/logo.svg" />
 </h1>
 
-<p align="center">
+<p align="center" >
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="https://happy-react.herokuapp.com/">Deploy</a>
+  <a href="https://happy-react.herokuapp.com/" target="_blank">Deploy</a>
 </p>
 
 <p align="center">
