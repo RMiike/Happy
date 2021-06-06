@@ -1,6 +1,7 @@
 <h1 align="center">
     <img alt="Happy" title="Happy" src=".github/logo.svg" />
 </h1>
+
 <p align="center" >
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -23,7 +24,7 @@
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
-
+ [Deploy](https://happy-react.herokuapp.com/)
 - [Asp net core](https://dotnet.microsoft.com/learn/aspnet/what-is-aspnet-core)
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
