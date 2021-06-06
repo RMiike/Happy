@@ -24,7 +24,7 @@
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
- [Deploy](https://happy-react.herokuapp.com/)
+
 - [Asp net core](https://dotnet.microsoft.com/learn/aspnet/what-is-aspnet-core)
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
