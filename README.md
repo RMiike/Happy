@@ -1,12 +1,11 @@
 <h1 align="center">
     <img alt="Happy" title="Happy" src=".github/logo.svg" />
 </h1>
-
 <p align="center" >
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a   target="_blank" href="https://happy-react.herokuapp.com/" >Deploy</a>
+  <a  rel="noopener" href="https://happy-react.herokuapp.com/" >Deploy</a>
 </p>
 
 <p align="center">
