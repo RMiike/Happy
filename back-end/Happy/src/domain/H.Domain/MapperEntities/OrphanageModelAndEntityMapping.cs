@@ -7,7 +7,7 @@ namespace H.Data.Repositories
 {
     public static class OrphanageModelAndEntityMapping
     {
-        public static Orphanage ConvertToOrphanage(this OrphanageModel orphanageModel)
+        public static Orphanage ConvertToOrphanage(this OrphanageModel orphanageModel, bool pending = true)
         {
 
             return new Orphanage(orphanageModel.Name,
@@ -16,7 +16,8 @@ namespace H.Data.Repositories
                                  orphanageModel.About,
                                  orphanageModel.Instructions,
                                  orphanageModel.OpeningHours,
-                                 orphanageModel.OpenOnWeekends);
+                                 orphanageModel.OpenOnWeekends,
+                                 pending);
         }
 
         public static IEnumerable<OrphanageModel> ConvertToModel(this IEnumerable<Orphanage> orphanages, string baseUrl, string remoteBaseUrl)

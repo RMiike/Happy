@@ -12,7 +12,8 @@ namespace H.Domain.Entities
                          string about,
                          string instructions,
                          string openingHours,
-                         bool openOnWeekends)
+                         bool openOnWeekends,
+                         bool pending)
         {
             Name = name;
             Latitude = latitude;
@@ -21,9 +22,19 @@ namespace H.Domain.Entities
             Instructions = instructions;
             OpeningHours = openingHours;
             OpenOnWeekends = openOnWeekends;
+            Pending = pending;
         }
 
-        public Orphanage(Guid id, string name, decimal latitude, decimal longitude, string about, string instructions, string openingHours, bool openOnWeekends, IEnumerable<Image> imagesPath)
+        public Orphanage(Guid id,
+                         string name,
+                         decimal latitude,
+                         decimal longitude,
+                         string about,
+                         string instructions,
+                         string openingHours,
+                         bool openOnWeekends,
+                         bool pending,
+                         IEnumerable<Image> imagesPath)
         {
             Id = id;
             Name = name;
@@ -34,6 +45,7 @@ namespace H.Domain.Entities
             OpeningHours = openingHours;
             OpenOnWeekends = openOnWeekends;
             Images = imagesPath;
+            Pending = pending;
         }
 
         protected Orphanage() { }
@@ -45,14 +57,19 @@ namespace H.Domain.Entities
         public string Instructions { get; private set; }
         public string OpeningHours { get; private set; }
         public bool OpenOnWeekends { get; private set; }
+        public bool Pending { get; private set; }
         public IEnumerable<Image> Images { get; set; }
+        public void AprovarCadastro()
+        {
+            if (Pending == true)
+                Pending = false;
+            return;
+        }
         public override bool IsValid()
         {
             ValidationResult = new OrphanageValidation().Validate(this);
             return ValidationResult.IsValid;
         }
-
-
         public class OrphanageValidation : AbstractValidator<Orphanage>
         {
             const int MAX_NAME_LENGTH = 20;

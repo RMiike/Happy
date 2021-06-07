@@ -38,8 +38,13 @@ namespace H.Data.Mapping
               .IsRequired(true);
 
             builder.Property(x => x.OpenOnWeekends)
-              .HasColumnType("boolean")
+              .HasColumnType("bit")
               .IsRequired(true);
+
+
+            builder.Property(x => x.Pending)
+              .HasColumnType("bit")
+              .IsRequired();
 
             builder.Ignore(x => x.ErrorMessages);
             builder.Ignore(x => x.ValidationResult);

@@ -31,7 +31,6 @@ namespace H.Data.Repositories
             _context.Orphanages.Remove(entity);
             return await _context.Commit();
         }
-
         public async Task<Orphanage> ObterPorId(Guid id)
         {
             var orphanage = await _context
@@ -45,6 +44,7 @@ namespace H.Data.Repositories
                                            e.Instructions,
                                            e.OpeningHours,
                                            e.OpenOnWeekends,
+                                           e.Pending,
                                            e.Images.ToList()))
                 .FirstOrDefaultAsync();
             return orphanage;
@@ -52,20 +52,36 @@ namespace H.Data.Repositories
 
         public async Task<IEnumerable<Orphanage>> ObterTodos()
         {
-            var aleatorio = _context.Orphanages.Select(e => e.Images.ToList()).ToList();
-
-
             var orphanages = await _context
                 .Orphanages
+                .Where(x => x.Pending == false)
                 .Select(e => new Orphanage(
-                   e.Id, e.Name, e.Latitude, e.Longitude, e.About, e.Instructions, e.OpeningHours, e.OpenOnWeekends, e.Images.ToList()))
+                   e.Id, e.Name, e.Latitude, e.Longitude, e.About, e.Instructions, e.OpeningHours, e.OpenOnWeekends, e.Pending, e.Images.ToList()))
                 .AsNoTracking()
                 .ToListAsync();
             return orphanages;
+        }
+        public async Task<IEnumerable<Orphanage>> ObterPendentes()
+        {
+            var orphanages = await _context
+                .Orphanages
+                .Where(x => x.Pending == true)
+                .Select(e => new Orphanage(
+                   e.Id, e.Name, e.Latitude, e.Longitude, e.About, e.Instructions, e.OpeningHours, e.OpenOnWeekends, e.Pending, e.Images.ToList()))
+                .AsNoTracking()
+                .ToListAsync();
+            return orphanages;
+        }
+        public async Task<Orphanage> Update(Orphanage entity)
+        {
+            var response = _context.Update(entity);
+            var isCommited = await _context.Commit();
+            return isCommited ? response.Entity : throw new InvalidOperationException();
         }
         public void Dispose()
         {
             _context?.Dispose();
         }
+
     }
 }

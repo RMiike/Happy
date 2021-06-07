@@ -26,10 +26,29 @@ namespace H.API.Controllers
             [FromForm] OrphanageModel orphanageModel)
             => CustomResponse(await _service.Adicionar(orphanageModel));
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(
+
+        [HttpGet("pending")]
+        public async Task<IActionResult> ObterOrfanatosPendentes(
+            [FromServices] IOrphanageService _service)
+            => CustomResponse(await _service.ObterPendentes());
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AprovarCadastro(
             Guid id,
             [FromServices] IOrphanageService _service)
-            => CustomResponse(await _service.Deletar(id));
+            => CustomResponse(await _service.AprovarCadastro(id));
+
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> EditarOrfanato(
+        //    Guid id,
+        //    [FromServices] IOrphanageService _service)
+        //   => CustomResponse(await _service.Deletar(id));
+
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(
+        // Guid id,
+        // [FromServices] IOrphanageService _service)
+        // => CustomResponse(await _service.Deletar(id));
+
     }
 }
