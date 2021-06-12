@@ -51,8 +51,8 @@ const CreateOrphanage: React.FC = () => {
     data.append("about", about);
     data.append("instructions", instructions);
     data.append("openingHours", openingHours);
-    data.append("latitude", String(latitude).replace(".", ","));
-    data.append("longitude", String(longitude).replace(".", ","));
+    data.append("latitude", String(latitude));
+    data.append("longitude", String(longitude));
     data.append("openOnWeekends", String(openOnWeekends));
     images.forEach((image) => {
       data.append("images", image);
