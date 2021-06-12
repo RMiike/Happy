@@ -40,8 +40,8 @@ const OrphanageData: React.FC = () => {
     data.append("instructions", instructions);
     data.append("openingHours", openingHours);
     data.append("openOnWeekends", String(openOnWeekends));
-    data.append("longitude", String(longitude).replace(".", ","));
-    data.append("latitude", String(latitude).replace(".", ","));
+    data.append("longitude", String(longitude));
+    data.append("latitude", String(latitude));
     images.forEach((image, index) => {
       data.append("images", {
         name: `image_${index}.jpg`,
